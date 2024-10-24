@@ -109,7 +109,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.mainapp"
+    namespace 'com.sush.mainapp'
     defaultConfig {
         applicationId 'com.sush.mainapp'
         minSdkVersion rootProject.ext.minSdkVersion
