@@ -8,7 +8,6 @@ import CustomDrawerItem from "../../components/CustomDrawerItem";
 import Dashboard from "../dashboard/Dashboard";
 import CCTVPage from "../Cctv";
 import CameraExample from "../samsungCameraIssue";
-import CheckMobileNumber from "../checkMobBusyOrNot";
 import ImageCarousel from "../imageCarousel";
 import Profile from "../profile";
 import GalleryDashboard from "../Gallery";
@@ -62,7 +61,6 @@ const NavBar = (props) => {
       <Drawer.Screen name="Dashboard" component={Dashboard} />
       <Drawer.Screen name="CCTV" component={CCTVPage} />
       <Drawer.Screen name="Camera" component={CameraExample} />
-      <Drawer.Screen name="CheckMobile" component={CheckMobileNumber} />
       <Drawer.Screen name="ImageCarousel" component={ImageCarousel} />
       <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
       <Drawer.Screen name="Gallery" component={GalleryDashboard} options={{ headerShown: false }} />

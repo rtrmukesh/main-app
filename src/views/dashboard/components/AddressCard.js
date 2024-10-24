@@ -21,19 +21,27 @@ const AddressCard = (props) => {
 
       const { latitude, longitude } = location.coords;
 
-      fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
-      )
-        .then(response => response.json())
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`, {
+        headers: {
+          'User-Agent': 'YourAppName/1.0 (http://yourappwebsite.com)',
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then(data => {
           setDetail(data);
         })
         .catch(error => {
           console.error('Error:', error);
         });
+
     })();
   }, []);
-
+  console.log('detail>>>------------------------> ', detail);
   const openMap = () => {
     if (location) {
       const { latitude, longitude } = location.coords;
