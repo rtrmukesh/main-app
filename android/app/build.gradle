@@ -83,6 +83,11 @@ react {
         /* Autolinking */
         autolinkLibrariesWithApp()
     }
+    //
+    // Added by install-expo-modules
+    entryFile = file(["node", "-e", "require('expo/scripts/resolveAppEntry')", rootDir.getAbsoluteFile().getParentFile().getAbsolutePath(), "android", "absolute"].execute(null, rootDir).text.trim())
+    cliFile = new File(["node", "--print", "require.resolve('@expo/cli')"].execute(null, rootDir).text.trim())
+    bundleCommand = "export:embed"
 }
 
 /**
@@ -102,6 +107,9 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+
+def nodeExecutable = "/home/sush/.nvm/versions/node/v18.20.4/bin/node"
+
 
 android {
     ndkVersion rootProject.ext.ndkVersion
@@ -167,6 +175,9 @@ android {
 }
 
 dependencies {
+   
+    implementation 'com.facebook.react:react-native:+'
+
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
