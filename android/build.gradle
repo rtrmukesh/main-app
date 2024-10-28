@@ -1,13 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+     ext.kotlin_version = '1.9.10'
     ext {
         buildToolsVersion = findProperty('android.buildToolsVersion') ?: '34.0.0'
-        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '23')
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '34')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
-        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.23'
-
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.10'
+        nodeBinaryPath = "/home/sush/.nvm/versions/node/v18.20.4/bin/node" // Update this with your Node.js path
         ndkVersion = "26.1.10909125"
     }
     repositories {
@@ -34,8 +35,20 @@ allprojects {
             url(new File(['node', '--print', "require.resolve('jsc-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), '../dist'))
         }
 
+         maven {
+            url "$rootDir/../node_modules/expo-cli/node_modules/@expo/maven-repo"
+        }
+
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+    }
+}
+
+task useNode {
+    doLast {
+        exec {
+            commandLine nodeBinaryPath, '--version'
+        }
     }
 }
